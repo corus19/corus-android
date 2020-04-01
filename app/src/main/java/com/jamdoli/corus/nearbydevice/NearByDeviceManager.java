@@ -5,6 +5,7 @@ import android.bluetooth.BluetoothManager;
 import android.content.Context;
 import android.location.Location;
 import android.util.Log;
+import com.jamdoli.corus.R;
 import com.jamdoli.corus.bluetooth.advertiser.BluetoothAdvertiserService;
 import com.jamdoli.corus.bluetooth.receiver.BluetoothScanner;
 import com.jamdoli.corus.bluetooth.receiver.DeviceScannerCallback;
@@ -15,6 +16,7 @@ import com.jamdoli.corus.utils.ApiClient;
 import com.jamdoli.corus.utils.ApiInterface;
 import com.jamdoli.corus.utils.AppSettingsUsingSharedPrefs;
 import java.util.List;
+import java.util.UUID;
 
 public class NearByDeviceManager {
 
@@ -33,6 +35,7 @@ public class NearByDeviceManager {
 	private final Context context;
 	private final ApiInterface apiInterface;
 	private BluetoothAdvertiserService bluetoothAdvertiserService;
+	private final UUID bluetoothServiceUUID;
 
 	public NearByDeviceManager(GpsHandler gpsHandler, NearByDeviceDao nearByDeviceDao,
 		BluetoothManager manager, Context context) {
@@ -42,6 +45,8 @@ public class NearByDeviceManager {
 		this.context = context;
 		this.apiInterface = ApiClient.getApiService();
 		this.appSettingsUsingSharedPrefs = AppSettingsUsingSharedPrefs.getInstance();
+
+		bluetoothServiceUUID = UUID.fromString(context.getString(R.string.bluetooth_service_uuid));
 	}
 
 	public void startScan() throws InterruptedException {
@@ -56,12 +61,13 @@ public class NearByDeviceManager {
 			BluetoothScanner.stopScan(deviceScannerCallback, manager.getAdapter());
 		}
 
-		bluetoothAdvertiserService = new BluetoothAdvertiserService(userBluetoothSignature);
+		bluetoothAdvertiserService = new BluetoothAdvertiserService(userBluetoothSignature,
+			bluetoothServiceUUID);
 		bluetoothAdvertiserService.startBluetoothAdvertisingService(manager, context);
 
-		deviceScannerCallback = new DeviceScannerCallback(this, context);
+		deviceScannerCallback = new DeviceScannerCallback(this, context, bluetoothServiceUUID);
 		if (!BluetoothScanner.startScan(deviceScannerCallback, manager.getAdapter(),
-			reportDelayInMillis)) {
+			reportDelayInMillis, bluetoothServiceUUID)) {
 
 			Thread.sleep(1000);
 			startScan();

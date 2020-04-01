@@ -11,7 +11,6 @@ import android.util.Log;
 import com.jamdoli.corus.nearbydevice.DeviceData;
 import com.jamdoli.corus.nearbydevice.NearByDeviceManager;
 import com.jamdoli.corus.utils.AppHelper;
-import com.jamdoli.corus.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -20,16 +19,18 @@ import java.util.UUID;
 public class DeviceScannerCallback extends ScanCallback {
 
 	private static final String TAG = "DeviceScannerCallback";
-	private static final ParcelUuid SERVICE_PARCEL_UUID = new ParcelUuid(
-		Constants.BLUETOOTH_SERVICE_UUID);
+	private final UUID bluetoothServiceUUID;
+	private final ParcelUuid serviceParcelUUID;
 
 	private final NearByDeviceManager nearByDeviceManager;
 	private final Context context;
 
 	public DeviceScannerCallback(NearByDeviceManager nearByDeviceManager,
-		Context context) {
+		Context context, UUID bluetoothServiceUUID) {
 		this.nearByDeviceManager = nearByDeviceManager;
 		this.context = context;
+		this.serviceParcelUUID = new ParcelUuid(bluetoothServiceUUID);
+		this.bluetoothServiceUUID = bluetoothServiceUUID;
 	}
 
 	@Override
@@ -79,7 +80,7 @@ public class DeviceScannerCallback extends ScanCallback {
 
 		Map<ParcelUuid, byte[]> serviceDataMap = scanRecord.getServiceData();
 
-		byte[] serviceData = serviceDataMap.get(SERVICE_PARCEL_UUID);
+		byte[] serviceData = serviceDataMap.get(serviceParcelUUID);
 
 		if (serviceData == null || serviceData.length != 12) {
 			return null;
@@ -92,7 +93,7 @@ public class DeviceScannerCallback extends ScanCallback {
 
 		BluetoothDevice bluetoothDevice = scanResult.getDevice();
 		BluetoothGattReceiverCallback bluetoothGattReceiverCallback = new BluetoothGattReceiverCallback(
-			nearByDeviceManager, scanResult);
+			nearByDeviceManager, scanResult, bluetoothServiceUUID);
 		BluetoothGatt bluetoothGatt = bluetoothDevice
 			.connectGatt(context, true, bluetoothGattReceiverCallback);
 
