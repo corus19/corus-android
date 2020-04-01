@@ -10,9 +10,9 @@ import android.os.Build;
 import android.util.Log;
 import com.jamdoli.corus.nearbydevice.DeviceData;
 import com.jamdoli.corus.nearbydevice.NearByDeviceManager;
-import com.jamdoli.corus.utils.Constants;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 public class BluetoothGattReceiverCallback extends BluetoothGattCallback {
@@ -22,12 +22,14 @@ public class BluetoothGattReceiverCallback extends BluetoothGattCallback {
 	private final NearByDeviceManager nearByDeviceManager;
 	private BluetoothGatt bluetoothGatt;
 	private final ScanResult scanResult;
+	private final UUID bluetoothServiceUUID;
 
 	public BluetoothGattReceiverCallback(
 		NearByDeviceManager nearByDeviceManager,
-		ScanResult scanResult) {
+		ScanResult scanResult, UUID bluetoothServiceUUID) {
 		this.nearByDeviceManager = nearByDeviceManager;
 		this.scanResult = scanResult;
+		this.bluetoothServiceUUID = bluetoothServiceUUID;
 	}
 
 	@Override
@@ -44,7 +46,7 @@ public class BluetoothGattReceiverCallback extends BluetoothGattCallback {
 	public void onServicesDiscovered(BluetoothGatt gatt, int status) {
 		if (status == BluetoothGatt.GATT_SUCCESS) {
 
-			BluetoothGattService service = gatt.getService(Constants.BLUETOOTH_SERVICE_UUID);
+			BluetoothGattService service = gatt.getService(bluetoothServiceUUID);
 			if (service != null) {
 				List<BluetoothGattCharacteristic> characteristicList = service
 					.getCharacteristics();

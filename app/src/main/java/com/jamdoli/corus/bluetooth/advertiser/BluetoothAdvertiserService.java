@@ -12,7 +12,6 @@ import android.bluetooth.le.BluetoothLeAdvertiser;
 import android.content.Context;
 import android.os.ParcelUuid;
 import android.util.Log;
-import com.jamdoli.corus.utils.Constants;
 import java.util.UUID;
 
 public class BluetoothAdvertiserService {
@@ -22,14 +21,21 @@ public class BluetoothAdvertiserService {
 	private BluetoothGattServer bluetoothGattServer;
 	private BluetoothAdvertiserServiceCallback bluetoothAdvertiserServiceCallback;
 	private final UUID userBluetoothSignature;
+	private final UUID bluetoothServiceUUID;
 
-	public BluetoothAdvertiserService(String userBluetoothSignature) {
+	public BluetoothAdvertiserService(String userBluetoothSignature,
+		UUID bluetoothServiceUUID) {
 		this.userBluetoothSignature = UUID.fromString(userBluetoothSignature);
+		this.bluetoothServiceUUID = bluetoothServiceUUID;
 	}
 
 
 	public void startBluetoothAdvertisingService(BluetoothManager bluetoothManager,
 		Context context) {
+
+		if (bluetoothGattServer != null) {
+			return;
+		}
 
 		startAdvertising(bluetoothManager.getAdapter());
 
@@ -55,7 +61,6 @@ public class BluetoothAdvertiserService {
 			return;
 		}
 
-
 		AdvertiseSettings settings = new AdvertiseSettings.Builder()
 			.setAdvertiseMode(AdvertiseSettings.ADVERTISE_MODE_LOW_POWER)
 			.setConnectable(true)
@@ -63,7 +68,7 @@ public class BluetoothAdvertiserService {
 			.setTxPowerLevel(AdvertiseSettings.ADVERTISE_TX_POWER_ULTRA_LOW)
 			.build();
 
-		ParcelUuid parcelUuid = new ParcelUuid(Constants.BLUETOOTH_SERVICE_UUID);
+		ParcelUuid parcelUuid = new ParcelUuid(bluetoothServiceUUID);
 		AdvertiseData data = new AdvertiseData.Builder()
 			.setIncludeTxPowerLevel(true)
 			.setIncludeDeviceName(false)
@@ -88,7 +93,7 @@ public class BluetoothAdvertiserService {
 	};
 
 	private BluetoothGattService createUserBluetoothService() {
-		BluetoothGattService service = new BluetoothGattService(Constants.BLUETOOTH_SERVICE_UUID,
+		BluetoothGattService service = new BluetoothGattService(bluetoothServiceUUID,
 			BluetoothGattService.SERVICE_TYPE_PRIMARY);
 
 		// Counter characteristic (read-only, supports notifications)
