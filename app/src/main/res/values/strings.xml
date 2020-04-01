@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">CorUS</string>
+    <string name="login_facebook">login with facebook</string>
+    <string name="ok">OK</string>
+    <string name="something_went_wrong">Something went wrong!!</string>
+    <string name="logout">logout</string>
+    <string name="intro_body_text">We use Bluetooth to determine your proximity with other users. If you\'re within transmittable proximity we keep track of it.  All private information is stored locally on your device.</string>
+    <string name="into_heading_text">Help stop the spread by turning on your Bluetooth.</string>
+    <string name="permissions_loader_meta_key">permissionsLoader</string>
+    <string name="enable_settings">Enable Permissions from settings</string>
+    <string name="enable">Enable</string>
+    <string name="mark_pos_text">Tap the above icon if you are tested positive for COVID-19 and help stop the spread to people with whom you came in contact with</string>
+    <string name="mark_postitve_dialog_text">You have been tested positive and you want people who were in your close proximity to be alerted about the same. Alerts will be sent after the Health Department verifies your information</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="marked_positive">Marked +ve</string>
+</resources>

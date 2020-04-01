@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2093cd</color>
+    <color name="colorPrimaryDark">#125688</color>
+    <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorAccent">#c8e8ff</color>
+    <color name="lighter_gray">#d5d5d5</color>
+    <color name="button_gray">#cbcbcb</color>
+    <color name="darker_gray">#8c8c8c</color>
+    <color name="transparent">#00000000</color>
+    <color name="gray">#95a5a6</color>
+    <color name="trans_black">#32000000</color>
+    <color name="light_grey">#d3d3d3</color>
+    <color name="activate_text_color">#FF666666</color>
+    <color name="deactivate_text_color">#FFCCCCCC</color>
+    <color name="divider_grey_color">#CCCCCC</color>
+
+    <color name="colortextgray">#9C9C9C</color>
+    <color name="colorlightgray">#F6F6F6</color>
+    <color name="colorfootergreen">#54bc4f</color>
+
+    <color name="colorRed">#FF3721</color>
+    <color name="colorheaderOrange">#ff3721</color>
+    <color name="colorheaderRedDark">#b42313</color>
+
+    <color name="colorOldOrange">#ff5722</color>
+    <color name="color_grey1">#eeeeee</color>
+    <color name="color_lightgreen">#bae7f7ef</color>
+    <color name="color_lightorange">#AAFAB8B1</color>
+    <color name="color_fb_orange">#f97566</color>
+
+    <color name="colorDashboardbg">#e6e6e6</color>
+    <color name="colordarkgray">#555555</color>
+    <color name="coloroverlay">#aaffffff</color>
+
+    <color name="colorlinkblue">#0000EE</color>
+    <color name="color_bg_grey">#eeeeee</color>
+    <color name="color_language_link">#2291E3</color>
+    <color name="color_green_text">#08b400</color>
+    <color name="color_green_bg">#f6fcf6</color>
+    <color name="color_yellow_bg">#fbba10</color>
+    <color name="color_yellow_border">#ffd200</color>
+
+</resources>

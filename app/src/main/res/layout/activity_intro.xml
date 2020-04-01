@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/layout_size_16dp"
+    tools:context=".activities.IntroActivity">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-black"
+        android:typeface="sans"
+        android:id="@+id/intro_tv_heading"
+        android:textSize="@dimen/text_size_25sp"
+        android:layout_marginTop="@dimen/layout_size_20dp"
+        android:text="@string/into_heading_text"
+        android:textColor="@color/colorPrimaryDark"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="sans-serif-medium"
+        android:typeface="normal"
+        android:id="@+id/intro_tv_text"
+        android:textSize="@dimen/text_size_20sp"
+        android:text="@string/intro_body_text"
+        android:layout_below="@+id/intro_tv_heading"
+        android:gravity="center|start"
+        android:layout_above="@+id/intro_bt_enable"
+        android:textColor="@color/colorPrimaryDark"/>
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:id="@+id/intro_bt_enable"
+        android:text="Enable bluetooth"
+        android:textAllCaps="false"
+        android:background="@drawable/rounded_bluebg"
+        android:fontFamily="sans-serif-medium"
+        android:textSize="@dimen/text_size_16sp"
+        android:layout_marginBottom="@dimen/layout_size_20dp"
+        android:layout_alignParentBottom="true"/>
+</RelativeLayout>
