@@ -72,7 +72,7 @@ public class BluetoothGattReceiverCallback extends BluetoothGattCallback {
 	public static DeviceData getDeviceData(ScanResult scanResult, String uuid) {
 
 		DeviceData.DeviceDataBuilder deviceDataBuilder = DeviceData.builder()
-			.bluetoothSignature(scanResult.getDevice().getAddress())
+			.bluetoothSignature(uuid)
 			.name(scanResult.getDevice().getName())
 			.rssi(scanResult.getRssi())
 			.timestamp(TimeUnit.MILLISECONDS
