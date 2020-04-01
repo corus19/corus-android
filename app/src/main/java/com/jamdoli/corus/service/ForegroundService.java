@@ -75,7 +75,8 @@ public class ForegroundService extends NonStopIntentService {
 
 	private void initiatePeriodicScanning() {
 
-		initializeBluetoothObjects();
+        initializeBluetoothScanner();
+		// initializeBluetoothObjects();
 
 		if (mTimer != null) {
 			mTimer.cancel();
@@ -146,7 +147,7 @@ public class ForegroundService extends NonStopIntentService {
 
 				@Override
 				public void run() {
-					foregroundService.initializeBluetoothScanner();
+					// foregroundService.initializeBluetoothScanner();
 				}
 			});
 		}

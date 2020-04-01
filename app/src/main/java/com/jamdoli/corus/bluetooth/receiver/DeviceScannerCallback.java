@@ -54,7 +54,7 @@ public class DeviceScannerCallback extends ScanCallback {
 
 			UUID userBluetoothSignature = getUserBluetoothSignatureFromService(
 				result.getScanRecord());
-			if (userBluetoothSignature == null) {
+			if (userBluetoothSignature != null) {
 				deviceDataList.add(BluetoothGattReceiverCallback
 					.getDeviceData(result, userBluetoothSignature.toString()));
 			} else {
@@ -104,7 +104,7 @@ public class DeviceScannerCallback extends ScanCallback {
 
 		bluetoothGattReceiverCallback.setBluetoothGatt(bluetoothGatt);
 
-		Log.w(TAG, "Connect status: " + bluetoothGatt.connect());
+		Log.w(TAG, "Connect status: ");
 
 	}
 
